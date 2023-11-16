@@ -1,0 +1,36 @@
+-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS Rerunmarket;
+
+-- Usar la base de datos
+USE Rerunmarket;
+
+-- Crear la tabla Usuarios
+CREATE TABLE IF NOT EXISTS Usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(80) NOT NULL UNIQUE,
+    password VARCHAR(200),
+    sid VARCHAR(300),
+    nombre VARCHAR(50),
+    telefono INT NOT NULL UNIQUE,
+    poblacion VARCHAR(50)
+);
+
+-- Crear la tabla Anuncios
+CREATE TABLE IF NOT EXISTS Anuncios (
+    idAnuncio INT AUTO_INCREMENT PRIMARY KEY,
+    idUsuario INT NOT NULL,
+    FOREIGN KEY (idUsuario) REFERENCES Usuarios(id),
+    Titulo VARCHAR(80),
+    descripcion VARCHAR(300),
+    precio DECIMAL(12, 2),
+    foto VARCHAR(300),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear la tabla Fotos
+CREATE TABLE IF NOT EXISTS Fotos (
+    idFoto INT AUTO_INCREMENT PRIMARY KEY,
+    idAnuncio INT NOT NULL,
+    FOREIGN KEY (idAnuncio) REFERENCES Anuncios(idAnuncio),
+    nombre_foto VARCHAR(200)
+);

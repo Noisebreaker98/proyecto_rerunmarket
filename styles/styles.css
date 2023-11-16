@@ -1,0 +1,233 @@
+/* ESQUELETO PRINCIPAL Y ESTILOS GENERALES*/
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    background-color: #45d9af;
+    padding: 10px 0;
+    color: white;
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 140px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #1b1b17;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: static;
+    bottom: 0;
+    width: 100%;
+}
+
+/* POPUP LOGIN/REGISTRO */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.popup-login {
+    background-color: #fff;
+    margin: 1% auto;
+    padding: 15px;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+}
+
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.btn-login {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    padding: 10px;
+    background-color: #45d9af;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos de los mensajes de error/exito */
+.mensaje {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ff4d4d;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    z-index: 9999;
+}
+
+.mensaje-exito{
+    background-color: #4d4dff;
+}
+
+/* Estilos para los anuncios y todos sus elementos */
+#anuncios {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f0e9e9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.anuncios-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    place-content: center;
+}
+
+.anuncio {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+    padding: 15px; /* Espaciado interno */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+}
+
+.anuncio:hover {
+    background-color: #f2f2f2;
+}
+
+.anuncio img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.anuncio h3 {
+    margin-top: 10px;
+    font-size: 1.5em; 
+    color: #333; 
+}
+
+.anuncio p {
+    color: #666; 
+}
+
+.anuncio p:last-child {
+    margin-bottom: 10px;
+}
+
+/* Estilos adicionales para resaltar el precio y la fecha */
+.anuncio p:nth-child(3) {
+    font-weight: bold;
+    color: #37b38f; 
+}
+
+.anuncio p:last-child {
+    font-style: italic;
+    color: #888; 
+}
+
+/* Estilos para la paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    background-color: #45d9af;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #37b38f;
+}
+
+
+
+
