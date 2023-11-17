@@ -65,6 +65,7 @@ if (isset($_SESSION['registro_mensaje'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="shortcut icon" href="./images/favicon_rerunmarket.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>ReRunMarket - Compra/Venta Segunda Mano</title>
 </head>
 
@@ -138,6 +139,7 @@ if (isset($_SESSION['registro_mensaje'])) {
                         <?php $imagenPath = 'images/fotosAnuncios/' . $anuncio->getFoto(); ?>
                         <img src="<?= $imagenPath ?>" alt="<?= $anuncio->getTitulo() ?>">
                         <p>Publicado hace <?= time_elapsed_string($anuncio->getFechaCreacion()) ?></p>
+                        <a href="deleteAnuncio.php?id=<?=$anuncio->getIdAnuncio()?>"><i class="fa-sharp fa-solid fa-trash"></i></a>
                     </div>
                 <?php endforeach; ?>
 

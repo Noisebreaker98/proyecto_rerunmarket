@@ -1,4 +1,12 @@
 <?php
+require_once 'modelos/AnunciosDAO.php';
+require_once 'modelos/Anuncio.php';
+require_once 'modelos/Conexion.php';
+require_once 'modelos/Config.php';
+require_once 'modelos/Sesion.php';
+require_once 'modelos/Funciones.php';
+require_once 'modelos/Usuario.php';
+
 session_start();
 
 // Verificar si el usuario está autenticado
@@ -6,13 +14,6 @@ if (!Sesion::getUsuario()) {
     header("Location: index.php");
     exit();
 }
-
-require_once 'modelos/AnunciosDAO.php';
-require_once 'modelos/Anuncio.php';
-require_once 'modelos/Conexion.php';
-require_once 'modelos/Config.php';
-require_once 'modelos/Sesion.php';
-require_once 'modelos/Funciones.php';
 
 // Obtener la conexión a la base de datos
 $conexionBD = new Conexion(MYSQL_USER, MYSQL_PASS, MYSQL_HOST, MYSQL_DB);

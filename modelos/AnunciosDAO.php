@@ -86,7 +86,7 @@ class AnunciosDAO
      */
     public function getById($id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM anuncios WHERE id = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM Anuncios WHERE idAnuncio = ?");
         $stmt->bind_param('i', $id);
         $stmt->execute();
 
@@ -103,7 +103,7 @@ class AnunciosDAO
 
     public function update(Anuncio $anuncio): bool
     {
-        if (!$stmt = $this->conn->prepare("UPDATE Anuncios SET idUsuario=?, Titulo=?, descripcion=?, precio=?, foto=? WHERE idAnuncio=?")) {
+        if (!$stmt = $this->conn->prepare("UPDATE Anuncios SET idUsuario=?, titulo=?, descripcion=?, precio=?, foto=? WHERE idAnuncio=?")) {
             echo "Error en la SQL: " . $this->conn->error;
         }
 
