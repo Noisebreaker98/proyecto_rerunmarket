@@ -101,6 +101,14 @@ input {
     border: 1px solid #ccc;
 }
 
+/* textarea {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    height: 100px;
+    resize: none;
+} */
+
 .btn-login {
     display: flex;
     justify-content: space-between;
@@ -227,6 +235,34 @@ button:hover {
 .pagination a:hover {
     background-color: #37b38f;
 }
+
+/* Contenedor de acciones */
+.actions {
+    display: flex;
+    gap: 10px; 
+}
+
+/* Botón de publicar */
+.modern-button {
+    background-color: #45d9af;
+    color: #ffffff;
+    border: 1px #45d9af solid;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modern-button:hover {
+    background-color: #2f8e75;
+}
+
+
+
+
+
+
+
 
 
 

@@ -65,12 +65,14 @@ if (isset($_SESSION['registro_mensaje'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
     <link rel="shortcut icon" href="./images/favicon_rerunmarket.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-te/1.4.0/jquery-te.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-te/1.4.0/jquery-te.min.js"></script>
     <title>ReRunMarket - Compra/Venta Segunda Mano</title>
 </head>
 
 <body>
-
     <!-- Cabecera -->
     <header>
         <div class="logo">
@@ -100,6 +102,12 @@ if (isset($_SESSION['registro_mensaje'])) {
     <!-- Seccion donde se mostrarán todos los anuncios -->
     <section id="anuncios">
         <h2>Anuncios</h2>
+        <!-- Agregar el botón para publicar nuevos anuncios -->
+        <?php if (isset($_SESSION['usuario'])) : ?>
+            <div class="publicar-button" style="display: flex; justify-content: center; padding: 0 0 20px 0;">
+                <button class="modern-button" onclick="mostrarPopup('publicar-anuncio')">Publicar <i class="fas fa-plus"></i></button>
+            </div>
+        <?php endif; ?>
 
         <?php
         // Obtener Anuncios ordenados por fecha
@@ -139,10 +147,14 @@ if (isset($_SESSION['registro_mensaje'])) {
                         <?php $imagenPath = 'images/fotosAnuncios/' . $anuncio->getFoto(); ?>
                         <img src="<?= $imagenPath ?>" alt="<?= $anuncio->getTitulo() ?>">
                         <p>Publicado hace <?= time_elapsed_string($anuncio->getFechaCreacion()) ?></p>
-                        <a href="deleteAnuncio.php?id=<?=$anuncio->getIdAnuncio()?>"><i class="fa-sharp fa-solid fa-trash"></i></a>
+                        <?php if ($usuario->getId() === $anuncio->getIdUsuario()) : ?>
+                        <div class="actions">
+                            <a href="DeleteAnuncio.php?id=<?= $anuncio->getIdAnuncio() ?>"><i class="fa-solid fa-trash" style="color: #45d9af;"></i></a>
+                            <a href="#"><i class="fa-solid fa-pen-to-square" style="color: #45d9af;"></i></a>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
-
             </div>
 
             <!-- APARTADO DE PAGINACION DE ANUNCIOS -->
@@ -238,7 +250,32 @@ if (isset($_SESSION['registro_mensaje'])) {
                 </div>
             </form>
         </div>
+        <!-- Agregar el popup para publicar nuevos anuncios -->
+        <div class="popup-login" id="popup-publicar-anuncio">
+            <span class="cerrar" onclick="cerrarPopup()">&times;</span>
+            <h2 id="popup-title-publicar-anuncio">Publicar Anuncio</h2>
+
+            <!-- Formulario de creación de anuncios -->
+            <form id="formulario-publicar-anuncio" method="post" action="CrearAnuncio.php" enctype="multipart/form-data">
+                <label for="titulo-anuncio">Título:</label>
+                <input type="text" id="titulo-anuncio" name="titulo-anuncio" required>
+
+                <label for="descripcion-anuncio">Descripción:</label>
+                <textarea id="descripcion-anuncio" name="descripcion-anuncio" required></textarea>
+
+                <label for="precio-anuncio">Precio:</label>
+                <input type="number" id="precio-anuncio" name="precio-anuncio" required>
+
+                <label for="foto-anuncio">Foto:</label>
+                <input type="file" id="foto-anuncio" name="foto-anuncio" accept="image/*">
+
+                <div class="btn-login">
+                    <button type="submit">Publicar</button>
+                </div>
+            </form>
+        </div>
     </div>
+
 
     <!-- Pie de página -->
     <footer>

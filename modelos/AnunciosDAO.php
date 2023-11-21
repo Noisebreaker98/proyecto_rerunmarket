@@ -18,7 +18,13 @@ class AnunciosDAO
             die("Error al preparar la consulta insert: " . $this->conn->error);
         }
 
-        $stmt->bind_param("issds", $anuncio->getIdUsuario(), $anuncio->getTitulo(), $anuncio->getDescripcion(), $anuncio->getPrecio(), $anuncio->getFoto());
+        $idUsuario = $anuncio->getIdUsuario();
+        $titulo = $anuncio->getTitulo();
+        $descripcion = $anuncio->getDescripcion();
+        $precio = $anuncio->getPrecio();
+        $foto = $anuncio->getFoto();
+
+        $stmt->bind_param("issds", $idUsuario, $titulo, $descripcion, $precio, $foto);
         $stmt->execute();
 
         return $stmt->insert_id;

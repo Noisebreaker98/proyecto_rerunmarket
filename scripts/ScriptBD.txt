@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Anuncios (
     idAnuncio INT AUTO_INCREMENT PRIMARY KEY,
     idUsuario INT NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES Usuarios(id),
-    Titulo VARCHAR(80),
+    titulo VARCHAR(80),
     descripcion VARCHAR(300),
     precio DECIMAL(12, 2),
     foto VARCHAR(300),
