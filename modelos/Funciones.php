@@ -80,5 +80,19 @@ function time_elapsed_string($datetime, $full = false) {
     return $string ? implode(', ', $string) . ' ' : 'ahora';
 }
 
+// Función para subir la foto y devolver el nombre asignado
+function subirFoto($archivo)
+{
+    $directorioDestino = 'images/fotosAnuncios/';
+    $nuevoNombre = generarNombreArchivo($archivo['name']);
+    $rutaCompleta = $directorioDestino . $nuevoNombre;
+
+    if (move_uploaded_file($archivo['tmp_name'], $rutaCompleta)) {
+        return $nuevoNombre;
+    } else {
+        return null;
+    }
+}
+
 
 

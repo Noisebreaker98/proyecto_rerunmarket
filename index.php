@@ -108,7 +108,29 @@ if (isset($_SESSION['registro_mensaje'])) {
                 <button class="modern-button" onclick="mostrarPopup('publicar-anuncio')">Publicar <i class="fas fa-plus"></i></button>
             </div>
         <?php endif; ?>
+        <?php
+        // Función para mostrar mensajes
+        function mostrarMensaje($tipo, $mensaje)
+        {
+            $clase = $tipo === 'exito' ? 'mensaje-exito' : 'mensaje-error';
+            echo "<div class='mensaje $clase'>$mensaje</div>";
+        }
 
+        // Verificar y mostrar mensajes
+        if (isset($_SESSION['mensaje_tipo'], $_SESSION['mensaje']) && !empty($_SESSION['mensaje'])) {
+            mostrarMensaje($_SESSION['mensaje_tipo'], $_SESSION['mensaje']);
+            unset($_SESSION['mensaje'], $_SESSION['mensaje_tipo']);
+        }
+
+        if (isset($_SESSION['errores_creacion_anuncio']) && !empty($_SESSION['errores_creacion_anuncio'])) {
+            echo '<div class="mensaje mensaje-error">';
+            foreach ($_SESSION['errores_creacion_anuncio'] as $error) {
+                echo "<p>$error</p>";
+            }
+            echo '</div>';
+            unset($_SESSION['errores_creacion_anuncio']);
+        }
+        ?>
         <?php
         // Obtener Anuncios ordenados por fecha
         $anunciosDAO = new AnunciosDAO($conn);
@@ -147,11 +169,11 @@ if (isset($_SESSION['registro_mensaje'])) {
                         <?php $imagenPath = 'images/fotosAnuncios/' . $anuncio->getFoto(); ?>
                         <img src="<?= $imagenPath ?>" alt="<?= $anuncio->getTitulo() ?>">
                         <p>Publicado hace <?= time_elapsed_string($anuncio->getFechaCreacion()) ?></p>
-                        <?php if ($usuario->getId() === $anuncio->getIdUsuario()) : ?>
-                        <div class="actions">
-                            <a href="DeleteAnuncio.php?id=<?= $anuncio->getIdAnuncio() ?>"><i class="fa-solid fa-trash" style="color: #45d9af;"></i></a>
-                            <a href="#"><i class="fa-solid fa-pen-to-square" style="color: #45d9af;"></i></a>
-                        </div>
+                        <?php if ($usuario && $usuario instanceof Usuario && $anuncio && $anuncio instanceof Anuncio && $usuario->getId() === $anuncio->getIdUsuario()) : ?>
+                            <div class="actions">
+                                <a href="DeleteAnuncio.php?id=<?= $anuncio->getIdAnuncio() ?>"><i class="fa-solid fa-trash" style="color: #45d9af;"></i></a>
+                                <a href="#"><i class="fa-solid fa-pen-to-square" style="color: #45d9af;"></i></a>
+                            </div>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
@@ -256,7 +278,7 @@ if (isset($_SESSION['registro_mensaje'])) {
             <h2 id="popup-title-publicar-anuncio">Publicar Anuncio</h2>
 
             <!-- Formulario de creación de anuncios -->
-            <form id="formulario-publicar-anuncio" method="post" action="CrearAnuncio.php" enctype="multipart/form-data">
+            <form id="formulario-publicar-anuncio" method="post" action="CreateAnuncio.php" enctype="multipart/form-data">
                 <label for="titulo-anuncio">Título:</label>
                 <input type="text" id="titulo-anuncio" name="titulo-anuncio" required>
 

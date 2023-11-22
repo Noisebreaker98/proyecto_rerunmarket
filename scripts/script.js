@@ -30,7 +30,53 @@ function mostrarPopup(tipo) {
         mostrarPopupElemento(popupPublicarAnuncio);
 
         // Reinicializar el editor jqte cada vez que se muestra el popup de publicar anuncio
-        $('#descripcion-anuncio').jqte();
+        $('#descripcion-anuncio').jqte({
+            // Tamaño de fuente
+        fsize: true,
+        // Negrita
+        bold: true,
+        // Cursiva
+        italic: true,
+        // Subrayado
+        underline: true,
+        // Color de texto
+        color: false,
+        // Añadir enlace
+        link: false,
+        // Eliminar enlace
+        unlink: false,
+        // Agregar lista ordenada
+        ol: false,
+        // Agregar lista desordenada
+        ul: false,
+        // Sangría izquierda
+        indent: false,
+        // Sangría derecha
+        outdent: false,
+        // Alineación izquierda
+        left: true,
+        // Alineación centro
+        center: true,
+        // Alineación derecha
+        right: true,
+        // Alineación justificada
+        justify: true,
+        // Eliminar formato
+        remove: false,
+        // Insertar imagen
+        source: false,
+        // Mostrar código fuente
+        sub: false,
+        // Superíndice
+        sup: false,
+        // Agregar lista de opciones de tamaño de fuente
+        fsizeItems: ['10', '12', '16', '20'],
+        // Placeholder del editor
+        placeholder: 'Escribe aquí...',
+        // Altura máxima del editor
+        height: 200,
+        maxlength: 200
+        });
     }
 
     // Mostrar el popup
@@ -72,54 +118,7 @@ setTimeout(function () {
 
 //Cuando la pagina está cargada
 $(document).ready(function() {
-    // Inicializar jqte con todas las propiedades
-    $('#descripcion-anuncio').jqte({
-        // Tamaño de fuente
-        fsize: true,
-        // Negrita
-        bold: true,
-        // Cursiva
-        italic: true,
-        // Subrayado
-        underline: true,
-        // Color de texto
-        color: true,
-        // Añadir enlace
-        link: true,
-        // Eliminar enlace
-        unlink: true,
-        // Agregar lista ordenada
-        ol: true,
-        // Agregar lista desordenada
-        ul: true,
-        // Sangría izquierda
-        indent: true,
-        // Sangría derecha
-        outdent: true,
-        // Alineación izquierda
-        left: true,
-        // Alineación centro
-        center: true,
-        // Alineación derecha
-        right: true,
-        // Alineación justificada
-        justify: true,
-        // Eliminar formato
-        remove: true,
-        // Insertar imagen
-        source: true,
-        // Mostrar código fuente
-        sub: true,
-        // Superíndice
-        sup: true,
-        // Agregar lista de opciones de tamaño de fuente
-        fsizeItems: ['10', '12', '16', '20'],
-        // Placeholder del editor
-        placeholder: 'Escribe aquí...',
-        // Altura máxima del editor
-        height: 200,
-        maxlength: 10
-    });
-
+    // Inicializar jqte
+    $('#descripcion-anuncio').jqte()
     // Documentación de jqte: https://github.com/jquery-text-editor/jqte#options
 });
