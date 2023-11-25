@@ -349,11 +349,11 @@ button:hover {
     color: #cccccc;
 }
 
-.dark-mode .anuncio p:nth-child(3) {
+.dark-mode .anuncio .price {
     color: #45d9af;
 }
 
-.dark-mode .anuncio p:last-child {
+.dark-mode .anuncio .date {
     color: #999999;
 }
 
