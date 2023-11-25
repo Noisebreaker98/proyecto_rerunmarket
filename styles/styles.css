@@ -163,9 +163,10 @@ button:hover {
     background-color: #ffffff;
     border-radius: 8px;
     transition: background-color 0.3s;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
-    padding: 15px; /* Espaciado interno */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    line-height: 2px;
+    padding: 15px; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
 }
 
 .anuncio:hover {
@@ -196,12 +197,12 @@ button:hover {
 }
 
 /* Estilos adicionales para resaltar el precio y la fecha */
-.anuncio p:nth-child(3) {
+.anuncio .price {
     font-weight: bold;
     color: #37b38f; 
 }
 
-.anuncio p:last-child {
+.anuncio .date {
     font-style: italic;
     color: #888; 
 }
@@ -232,6 +233,7 @@ button:hover {
 .actions {
     display: flex;
     gap: 10px; 
+    font-size: 20px;
 }
 
 /* Botón de publicar */
@@ -248,6 +250,164 @@ button:hover {
 .modern-button:hover {
     background-color: #2f8e75;
 }
+
+/* Estilos para el formulario de búsqueda */
+#form-buscar {
+    display: flex;
+    margin-bottom: 5px;
+    flex-direction: row;
+    align-items: flex-start; 
+}
+
+#form-buscar input {
+    flex: 1; 
+    margin-right: 10px; 
+    border-radius: 4px;
+}
+
+#form-buscar button {
+    font-weight: bold;
+    background-color: #5758586c;
+    border-radius: 4px;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+#form-buscar button:hover {
+    background-color: #349aa0;
+    color: #1b1b17;
+}
+
+/* Estilo para el botón de modo oscuro */
+.dark-mode-container{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.dark-mode-container button{
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+    background-color: none;
+}
+
+.dark-mode-container button:hover{
+    background: none;
+}
+
+/* Estilos generales para el modo oscuro */
+.dark-mode {
+    background-color: #1b1b17;
+    color: #ffffff;
+}
+
+/* Estilos para el header */
+.dark-mode header {
+    background-color: #333;
+}
+
+/* Estilos para la navegación */
+.dark-mode nav {
+    background-color: #333;
+}
+
+.dark-mode nav a {
+    color: #ffffff;
+}
+
+.dark-mode nav a:hover {
+    color: #45d9af;
+}
+
+/* Estilos para el footer */
+.dark-mode footer {
+    background-color: #2e2e2c;
+}
+
+/* Estilos para los anuncios y sus elementos */
+.dark-mode #anuncios {
+    background-color: #1b1b17;
+}
+
+.dark-mode .anuncio {
+    background-color: #2f2f2f;
+}
+
+.dark-mode .anuncio:hover {
+    background-color: #3f3f3f;
+}
+
+.dark-mode .anuncio h3 {
+    color: #ffffff;
+}
+
+.dark-mode .anuncio p {
+    color: #cccccc;
+}
+
+.dark-mode .anuncio p:nth-child(3) {
+    color: #45d9af;
+}
+
+.dark-mode .anuncio p:last-child {
+    color: #999999;
+}
+
+/* Estilos adicionales para el formulario de búsqueda en modo oscuro */
+.dark-mode #form-buscar input {
+    background-color: #2f2f2f;
+    color: #ffffff;
+}
+
+.dark-mode #form-buscar button {
+    background-color: #5758586c;
+    color: white;
+}
+
+.dark-mode #form-buscar button:hover {
+    background-color: #349aa0;
+    color: #1b1b17;
+}
+
+/* Estilos para botón modo oscuro en modo oscuro */
+#dark-mode-button {
+    background: none;
+}
+
+/* Estilos para el formulario de inicio de sesión en modo oscuro */
+.dark-mode .popup-login,
+.dark-mode .popup-registro {
+    background-color: #2f2f2f;
+    color: #ffffff;
+}
+
+.dark-mode label,
+.dark-mode input {
+    color: #ffffff;
+}
+
+.dark-mode input {
+    background-color: #454545;
+    border: 1px solid #555;
+}
+
+.dark-mode .btn-login button {
+    background-color: #5758586c;
+    color: white;
+}
+
+.dark-mode .btn-login button:hover {
+    background-color: #349aa0;
+    color: #1b1b17;
+}
+
+
+
+
 
 
 

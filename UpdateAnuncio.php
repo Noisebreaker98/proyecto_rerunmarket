@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: UpdateAnuncio.php?idAnuncio=$idAnuncio");
         die();
     }
-    if ($precio < 1 || $precio > 999999999) {
+    if (!is_numeric($precio) || $precio <= 0 || $precio > 999999999) {
         $_SESSION['errorUpdate'] = "El precio introducido no es válido";
         header("Location: UpdateAnuncio.php?idAnuncio=$idAnuncio");
         die();
@@ -175,10 +175,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" id="titulo-anuncio" name="titulo-anuncio" value="<?= $anuncio->getTitulo() ?>" required>
 
             <label for="descripcion-anuncio">Descripción:</label>
-            <textarea id="descripcion-anuncio" name="descripcion-anuncio" required><?= $anuncio->getDescripcion() ?></textarea>
+            <textarea id="descripcion-anuncio" name="descripcion-anuncio" required><?= html_entity_decode(htmlspecialchars_decode($anuncio->getDescripcion())) ?></textarea>
 
             <label for="precio-anuncio">Precio:</label>
-            <input type="number" id="precio-anuncio" name="precio-anuncio" value="<?= $anuncio->getPrecio() ?>" required>
+            <input type="text" id="precio-anuncio" name="precio-anuncio" pattern="\d+(\.\d{1,2})?" value="<?= $anuncio->getPrecio() ?>" required placeholder="Ejemplo: 15.99">
 
             <!-- Campo para foto principal -->
             <label for="foto-portada">Foto Principal:</label>

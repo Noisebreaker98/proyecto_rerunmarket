@@ -1,4 +1,3 @@
-console.log('scripts.js loaded');
 /**
  * Muestra el popup según el tipo proporcionado.
  *
@@ -32,50 +31,50 @@ function mostrarPopup(tipo) {
         // Reinicializar el editor jqte cada vez que se muestra el popup de publicar anuncio
         $('#descripcion-anuncio').jqte({
             // Tamaño de fuente
-        fsize: true,
-        // Negrita
-        bold: true,
-        // Cursiva
-        italic: true,
-        // Subrayado
-        underline: true,
-        // Color de texto
-        color: false,
-        // Añadir enlace
-        link: false,
-        // Eliminar enlace
-        unlink: false,
-        // Agregar lista ordenada
-        ol: false,
-        // Agregar lista desordenada
-        ul: false,
-        // Sangría izquierda
-        indent: false,
-        // Sangría derecha
-        outdent: false,
-        // Alineación izquierda
-        left: true,
-        // Alineación centro
-        center: true,
-        // Alineación derecha
-        right: true,
-        // Alineación justificada
-        justify: true,
-        // Eliminar formato
-        remove: false,
-        // Insertar imagen
-        source: false,
-        // Mostrar código fuente
-        sub: false,
-        // Superíndice
-        sup: false,
-        // Agregar lista de opciones de tamaño de fuente
-        fsizeItems: ['10', '12', '16', '20'],
-        // Placeholder del editor
-        placeholder: 'Escribe aquí...',
-        // Altura máxima del editor
-        height: 200,
-        maxlength: 200
+            fsize: true,
+            // Negrita
+            bold: true,
+            // Cursiva
+            italic: true,
+            // Subrayado
+            underline: true,
+            // Color de texto
+            color: false,
+            // Añadir enlace
+            link: false,
+            // Eliminar enlace
+            unlink: false,
+            // Agregar lista ordenada
+            ol: false,
+            // Agregar lista desordenada
+            ul: false,
+            // Sangría izquierda
+            indent: false,
+            // Sangría derecha
+            outdent: false,
+            // Alineación izquierda
+            left: true,
+            // Alineación centro
+            center: true,
+            // Alineación derecha
+            right: true,
+            // Alineación justificada
+            justify: true,
+            // Eliminar formato
+            remove: false,
+            // Insertar imagen
+            source: false,
+            // Mostrar código fuente
+            sub: false,
+            // Superíndice
+            sup: false,
+            // Agregar lista de opciones de tamaño de fuente
+            fsizeItems: ['10', '12', '16', '20'],
+            // Placeholder del editor
+            placeholder: 'Escribe aquí...',
+            // Altura máxima del editor
+            height: 200,
+            maxlength: 300
         });
     }
 
@@ -117,8 +116,31 @@ setTimeout(function () {
 }, 2000); // 2000 milisegundos = 2 segundos
 
 //Cuando la pagina está cargada
-$(document).ready(function() {
+$(document).ready(function () {
     // Inicializar jqte
     $('#descripcion-anuncio').jqte()
     // Documentación de jqte: https://github.com/jquery-text-editor/jqte#options
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Función para alternar el modo oscuro
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle("dark-mode");
+
+       // Cambiar la imagen del logo en el header
+    const logoImage = document.getElementById("logo-img");
+
+    if (logoImage) {
+        const isDarkMode = body.classList.contains("dark-mode");
+        const newSrc = isDarkMode ? "./images/logo_rerunmarket_dark.png" : "./images/logo_rerunmarket1.png";
+
+        logoImage.src = newSrc;
+        }
+    }
+    // Asociar la función al botón o evento que desencadena el cambio de modo oscuro
+    const darkModeButton = document.getElementById("dark-mode-button");
+    if (darkModeButton) {
+        darkModeButton.addEventListener("click", toggleDarkMode);
+    }
 });

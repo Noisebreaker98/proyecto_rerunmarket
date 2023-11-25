@@ -80,11 +80,22 @@ if (isset($_SESSION['registro_mensaje'])) {
     <!-- Cabecera -->
     <header>
         <div class="logo">
-            <img src="./images/logo_rerunmarket1.png" alt="ReRunMarket.png">
+            <img src="./images/logo_rerunmarket1.png" alt="ReRunMarket.png" id="logo-img">
             <h1>ReRunMarket</h1>
+            <div class="dark-mode-container">
+            <button id="dark-mode-button"><i class="fa-solid fa-moon" style="color: #fff;"></i></button>
+            </div>
         </div>
         <nav>
             <ul>
+            <li>
+                <div>
+                <form action="index.php" method="get" id="form-buscar">
+                        <input type="text" name="busqueda" placeholder="Buscar por título...">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>        
+                </li>
                 <li><a href="index.php">Anuncios</a></li>
                 <?php
                 // Verificar si el usuario está autenticado
@@ -153,10 +164,13 @@ if (isset($_SESSION['registro_mensaje'])) {
         // Calcular el total de páginas
         $totalPaginas = ceil($totalAnuncios / $elementosPorPagina);
 
-        // Obtener los anuncios según la página actual y la condición de 'Mis Anuncios'
         if ($mostrarMisAnuncios) {
             // Mostrar los anuncios del usuario actual
             $anuncios = $anunciosDAO->getByUserId($usuario->getId());
+        } elseif (isset($_GET['busqueda']) && !empty($_GET['busqueda'])) {
+            // Realizar búsqueda y mostrar los resultados
+            $busqueda = $_GET['busqueda'];
+            $anuncios = $anunciosDAO->searchByTitle($busqueda);
         } else {
             // Obtener todos los anuncios ordenados por fecha
             $anuncios = $anunciosDAO->getAllOrderedByDateLimited($inicio, $elementosPorPagina);
@@ -167,12 +181,14 @@ if (isset($_SESSION['registro_mensaje'])) {
             <div class="anuncios-container">
                 <?php foreach ($anuncios as $anuncio) : ?>
                     <div class="anuncio">
-                        <h3><?= $anuncio->getTitulo() ?></h3>
-                        <p><?= $anuncio->getDescripcion() ?></p>
-                        <p><?= $anuncio->getPrecio() ?>€</p>
+                        <h3><?= $anuncio->getTitulo() ?>
+                        <a href="VerAnuncio.php?idAnuncio=<?= $anuncio->getIdAnuncio(); ?>"><i class="fa-solid fa-magnifying-glass" style="color: #45d9af;"></i></a>
+                        </h3>
+                        <p><?= html_entity_decode(htmlspecialchars_decode($anuncio->getDescripcion())) ?></p>
+                        <p class="price"><?= $anuncio->getPrecio() ?>€</p>
                         <?php $imagenPath = 'images/fotosAnuncios/' . $anuncio->getFoto(); ?>
                         <img src="<?= $imagenPath ?>" alt="<?= $anuncio->getTitulo() ?>">
-                        <p>Publicado hace <?= time_elapsed_string($anuncio->getFechaCreacion()) ?></p>
+                        <p class="date">Publicado hace <?= time_elapsed_string($anuncio->getFechaCreacion()) ?></p>
                         <?php if ($usuario && $usuario instanceof Usuario && $anuncio && $anuncio instanceof Anuncio && $usuario->getId() === $anuncio->getIdUsuario()) : ?>
                             <div class="actions">
                                 <a href="DeleteAnuncio.php?id=<?= $anuncio->getIdAnuncio() ?>"><i class="fa-solid fa-trash" style="color: #45d9af;"></i></a>
@@ -290,10 +306,16 @@ if (isset($_SESSION['registro_mensaje'])) {
                 <textarea id="descripcion-anuncio" name="descripcion-anuncio" required></textarea>
 
                 <label for="precio-anuncio">Precio:</label>
-                <input type="number" id="precio-anuncio" name="precio-anuncio" required>
+                <input type="text" id="precio-anuncio" pattern="\d+(\.\d{1,2})?" name="precio-anuncio" placeholder="Ejemplo: 15.99" required>
 
-                <label for="foto-anuncio">Foto:</label>
+                <label for="foto-anuncio">Foto principal:</label>
                 <input type="file" id="foto-anuncio" name="foto-anuncio" accept="image/*">
+
+                <label for="foto-anuncio2">Más fotos:</label>
+                <input type="file" id="foto-anuncio2" name="foto-anuncio2" accept="image/*">
+
+                <label for="foto-anuncio3">Más fotos:</label>
+                <input type="file" id="foto-anuncio3" name="foto-anuncio3" accept="image/*">
 
                 <div class="btn-login">
                     <button type="submit">Publicar</button>

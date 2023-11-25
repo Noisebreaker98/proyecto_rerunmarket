@@ -52,8 +52,7 @@ function validarEntrada($entrada): string
 
     // Convierte caracteres especiales en entidades HTML
     $entrada = htmlspecialchars($entrada);
-
-    $entrada = htmlspecialchars_decode($entrada);
+    $entrada = htmlentities($entrada);
 
     return $entrada;
 }

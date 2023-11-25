@@ -78,6 +78,23 @@ class UsuariosDAO {
         }
     }
 
+    public function getById($id): Usuario|null {
+        if (!$stmt = $this->conn->prepare("SELECT * FROM Usuarios WHERE id = ?")) {
+            echo "Error en la SQL: " . $this->conn->error;
+        }
+
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows >= 1) {
+            $usuario = $result->fetch_object(Usuario::class);
+            return $usuario;
+        } else {
+            return null;
+        }
+    }
+
     public function update(Usuario $usuario): bool {
         if (!$stmt = $this->conn->prepare("UPDATE Usuarios SET email=?, password=?, sid=?, nombre=?, telefono=?, poblacion=? WHERE id=?")) {
             echo "Error en la SQL: " . $this->conn->error;

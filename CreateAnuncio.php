@@ -22,6 +22,9 @@ if (!Sesion::getUsuario()) {
 $conexionBD = new Conexion(MYSQL_USER, MYSQL_PASS, MYSQL_HOST, MYSQL_DB);
 $conn = $conexionBD->getConexion();
 
+//Crear objeto FotosDAO
+$fotosDAO = new FotosDAO($conn);
+
 // Verificar si el formulario ha sido enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recuperar datos del formulario
@@ -39,8 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($descripcion)) {
         $errores[] = 'La descripción no puede estar vacía.';
     }
-    if (!is_numeric($precio) || $precio <= 0) {
+    if (!is_numeric($precio) || $precio <= 0 || $precio > 999999999) {
         $errores[] = 'El precio debe ser un número positivo.';
+    }
+    // Verificar si se ha subido una foto
+    if (isset($_FILES['foto-anuncio']) && $_FILES['foto-anuncio']['error'] === 0) {
+        $fotoNombre = subirFoto($_FILES['foto-anuncio']);
+    } else {
+        $errores[] = 'Debes subir al menos una foto del producto';
     }
 
     // Verificar si hay errores
@@ -49,13 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['errores_creacion_anuncio'] = $errores;
         header('Location: index.php');
         exit();
-    }
-
-    // Verificar si se ha subido una foto
-    if (isset($_FILES['foto-anuncio']) && $_FILES['foto-anuncio']['error'] === 0) {
-        $fotoNombre = subirFoto($_FILES['foto-anuncio']);
-    } else {
-        $fotoNombre = null;
     }
 
     // Obtener el usuario actual
@@ -74,6 +76,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idAnuncio = $anunciosDAO->insert($anuncio);
 
     if ($idAnuncio) {
+        // Si se ha insertado bien el anuncio insertamos la foto principal asociada al anuncio recien creado
+        $fotoP = new Foto();
+        $fotoP->setIdAnuncio($idAnuncio);
+        $fotoP->setNombreFoto($fotoNombre);
+        $fotosDAO->insert($fotoP);
+
+        // Subir y asociar la segunda foto opcional
+        if (isset($_FILES['foto-anuncio2']) && $_FILES['foto-anuncio2']['error'] === 0) {
+            $fotoNombre2 = subirFoto($_FILES['foto-anuncio2']);
+
+            // La metemos en la tabla de FOTOS asociada al anuncio
+            $fotoOpcional1 = new Foto();
+            $fotoOpcional1->setIdAnuncio($idAnuncio);
+            $fotoOpcional1->setNombreFoto($fotoNombre2);
+            $fotosDAO->insert($fotoOpcional1);
+        }
+
+        // Subir y asociar la tercera foto opcional
+        if (isset($_FILES['foto-anuncio3']) && $_FILES['foto-anuncio3']['error'] === 0) {
+            $fotoNombre3 = subirFoto($_FILES['foto-anuncio3']);
+
+            // La metemos en la tabla de FOTOS asociada al anuncio
+            $fotoOpcional2 = new Foto();
+            $fotoOpcional2->setIdAnuncio($idAnuncio);
+            $fotoOpcional2->setNombreFoto($fotoNombre3);
+            $fotosDAO->insert($fotoOpcional2);
+        }
+
         // La inserción fue exitosa
         $_SESSION['mensaje'] = 'Anuncio creado con éxito.';
         $_SESSION['mensaje_tipo'] = 'exito';
