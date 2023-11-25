@@ -121,7 +121,6 @@ class Anuncio {
         return $this;
     }
 
-
     /**
      * Get the value of fecha_creacion
      */
@@ -139,4 +138,5 @@ class Anuncio {
 
         return $this;
     }
+
 }

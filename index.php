@@ -34,6 +34,10 @@ if (!Sesion::getUsuario() && isset($_COOKIE['sid'])) {
 // Obtén el objeto de usuario de la sesión
 $usuario = Sesion::getUsuario();
 
+// Verificar si hay mensaje de error en subida de archivos
+if (isset($_GET['errorArchivos'])) {
+    echo '<div class="mensaje mensaje-error">' . htmlspecialchars($_GET['errorArchivos']) . '</div>';
+}
 // Verificar si hay un mensaje de registro y mostrarlo
 if (isset($_SESSION['registro_mensaje'])) {
     $mensaje_tipo = isset($_SESSION['registro_mensaje_tipo']) ? $_SESSION['registro_mensaje_tipo'] : 'error';
@@ -172,7 +176,7 @@ if (isset($_SESSION['registro_mensaje'])) {
                         <?php if ($usuario && $usuario instanceof Usuario && $anuncio && $anuncio instanceof Anuncio && $usuario->getId() === $anuncio->getIdUsuario()) : ?>
                             <div class="actions">
                                 <a href="DeleteAnuncio.php?id=<?= $anuncio->getIdAnuncio() ?>"><i class="fa-solid fa-trash" style="color: #45d9af;"></i></a>
-                                <a href="#"><i class="fa-solid fa-pen-to-square" style="color: #45d9af;"></i></a>
+                                <a href="UpdateAnuncio.php?idAnuncio=<?= $anuncio->getIdAnuncio()?>"><i class="fa-solid fa-pen-to-square" style="color: #45d9af;"></i></a>
                             </div>
                         <?php endif; ?>
                     </div>

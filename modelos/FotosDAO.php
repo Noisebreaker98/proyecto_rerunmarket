@@ -3,7 +3,7 @@
 require_once 'Conexion.php';
 require_once 'Foto.php';
 
-class FotoDAO {
+class FotosDAO {
     private mysqli $conn;
 
     public function __construct($conn) {
@@ -15,7 +15,10 @@ class FotoDAO {
             die("Error al preparar la consulta insert: " . $this->conn->error);
         }
 
-        $stmt->bind_param("is", $foto->getIdAnuncio(), $foto->getNombreFoto());
+        $idAnuncio = $foto->getIdAnuncio();
+        $nombreFoto = $foto->getNombreFoto();
+
+        $stmt->bind_param("is", $idAnuncio, $nombreFoto);
         $stmt->execute();
 
         return $stmt->insert_id;
@@ -73,6 +76,19 @@ class FotoDAO {
         $stmt->execute();
 
         return $stmt->affected_rows == 1;
+    }
+
+    public function deleteByAnuncioId(int $anuncioId): bool
+    {
+        // Preparar la consulta para eliminar fotos por ID de anuncio
+        if (!$stmt = $this->conn->prepare("DELETE FROM Fotos WHERE idAnuncio = ?")) {
+            echo "Error al preparar la consulta deleteByAnuncioId: " . $this->conn->error;
+        }
+
+        $stmt->bind_param("i", $anuncioId);
+        $result = $stmt->execute();
+
+        return $result;
     }
 }
 ?>

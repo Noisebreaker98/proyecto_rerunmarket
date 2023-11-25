@@ -25,32 +25,20 @@ $conn = $conexionBD->getConexion();
 // Verificar si el formulario ha sido enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recuperar datos del formulario
-    $titulo = $_POST['titulo-anuncio'];
-    $descripcion = $_POST['descripcion-anuncio'];
-    $precio = $_POST['precio-anuncio'];
+    $titulo = validarEntrada($_POST['titulo-anuncio']);
+    $descripcion = validarEntrada($_POST['descripcion-anuncio']);
+    $precio = validarEntrada($_POST['precio-anuncio']);
 
-    // Validar datos
+    // Array donde se guardarán posibles errores
     $errores = [];
 
-    // Verificar que el título no esté vacío
+    // Validaciones
     if (empty($titulo)) {
         $errores[] = 'El título no puede estar vacío.';
     }
-
-    // Verificar que la descripción no esté vacía
     if (empty($descripcion)) {
         $errores[] = 'La descripción no puede estar vacía.';
-    } else {
-        // Permitir solo ciertas etiquetas HTML en la descripción
-        $descripcion = strip_tags($descripcion, '<strong><em><br><u>');
-
-        // Verificar si la descripción es válida después de eliminar las etiquetas no permitidas
-        if (empty(trim($descripcion))) {
-            $errores[] = 'La descripción no puede consistir solo en etiquetas HTML no permitidas.';
-        }
     }
-
-    // Verificar que el precio sea un número positivo
     if (!is_numeric($precio) || $precio <= 0) {
         $errores[] = 'El precio debe ser un número positivo.';
     }

@@ -14,7 +14,7 @@ class AnunciosDAO
 
     public function insert(Anuncio $anuncio): int|bool
     {
-        if (!$stmt = $this->conn->prepare("INSERT INTO Anuncios (idUsuario, Titulo, descripcion, precio, foto) VALUES (?, ?, ?, ?, ?)")) {
+        if (!$stmt = $this->conn->prepare("INSERT INTO Anuncios (idUsuario, titulo, descripcion, precio, foto) VALUES (?, ?, ?, ?, ?)")) {
             die("Error al preparar la consulta insert: " . $this->conn->error);
         }
 
@@ -109,13 +109,20 @@ class AnunciosDAO
 
     public function update(Anuncio $anuncio): bool
     {
-        if (!$stmt = $this->conn->prepare("UPDATE Anuncios SET idUsuario=?, titulo=?, descripcion=?, precio=?, foto=? WHERE idAnuncio=?")) {
-            echo "Error en la SQL: " . $this->conn->error;
+        if (!$stmt = $this->conn->prepare("UPDATE Anuncios SET titulo = ?, descripcion = ?, precio = ?, foto = ? WHERE idAnuncio = ?")) {
+            die("Error al preparar la consulta update: " . $this->conn->error);
         }
-
-        $stmt->bind_param("issdsi", $anuncio->getIdUsuario(), $anuncio->getTitulo(), $anuncio->getDescripcion(), $anuncio->getPrecio(), $anuncio->getFoto(), $anuncio->getIdAnuncio());
-
-        return $stmt->execute();
+    
+        $titulo = $anuncio->getTitulo();
+        $descripcion = $anuncio->getDescripcion();
+        $precio = $anuncio->getPrecio();
+        $foto = $anuncio->getFoto();
+        $idAnuncio = $anuncio->getIdAnuncio();
+    
+        $stmt->bind_param("ssdsi", $titulo, $descripcion, $precio, $foto, $idAnuncio);
+        $stmt->execute();
+    
+        return $stmt->affected_rows > 0;
     }
 
     public function delete($idAnuncio): bool
