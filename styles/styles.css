@@ -132,7 +132,7 @@ button:hover {
     z-index: 9999;
 }
 
-.mensaje-exito{
+.mensaje-exito {
     background-color: #4d4dff;
 }
 
@@ -163,10 +163,10 @@ button:hover {
     background-color: #ffffff;
     border-radius: 8px;
     transition: background-color 0.3s;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 2px;
-    padding: 15px; 
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+    padding: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .anuncio:hover {
@@ -184,12 +184,12 @@ button:hover {
 
 .anuncio h3 {
     margin-top: 10px;
-    font-size: 1.5em; 
-    color: #333; 
+    font-size: 1.5em;
+    color: #333;
 }
 
 .anuncio p {
-    color: #666; 
+    color: #666;
 }
 
 .anuncio p:last-child {
@@ -199,12 +199,12 @@ button:hover {
 /* Estilos adicionales para resaltar el precio y la fecha */
 .anuncio .price {
     font-weight: bold;
-    color: #37b38f; 
+    color: #37b38f;
 }
 
 .anuncio .date {
     font-style: italic;
-    color: #888; 
+    color: #888;
 }
 
 /* Estilos para la paginación */
@@ -232,7 +232,7 @@ button:hover {
 /* Contenedor de acciones */
 .actions {
     display: flex;
-    gap: 10px; 
+    gap: 10px;
     font-size: 20px;
 }
 
@@ -256,12 +256,12 @@ button:hover {
     display: flex;
     margin-bottom: 5px;
     flex-direction: row;
-    align-items: flex-start; 
+    align-items: flex-start;
 }
 
 #form-buscar input {
-    flex: 1; 
-    margin-right: 10px; 
+    flex: 1;
+    margin-right: 10px;
     border-radius: 4px;
 }
 
@@ -273,7 +273,7 @@ button:hover {
     padding: 10px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease; 
+    transition: background-color 0.3s ease;
 }
 
 #form-buscar button:hover {
@@ -282,20 +282,20 @@ button:hover {
 }
 
 /* Estilo para el botón de modo oscuro */
-.dark-mode-container{
+.dark-mode-container {
     position: absolute;
     top: 0;
     right: 0;
 }
 
-.dark-mode-container button{
+.dark-mode-container button {
     font-size: 22px;
     border: none;
     cursor: pointer;
     background-color: none;
 }
 
-.dark-mode-container button:hover{
+.dark-mode-container button:hover {
     background: none;
 }
 
@@ -405,17 +405,85 @@ button:hover {
     color: #1b1b17;
 }
 
+/* Media Queries para dispositivos móviles */
+@media screen and (max-width: 600px) {
 
+    /* Estilos generales */
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+    }
 
+    /* Header */
+    header {
+        background-color: #45d9af;
+        padding: 10px 0;
+        color: white;
+        text-align: center;
+    }
 
+    .logo img {
+        width: 100px;
+        /* Ajusta el tamaño del logo para pantallas más pequeñas */
+    }
 
+    /* Navegación */
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
 
+    nav li {
+        margin: 0 15px;
+    }
 
+    nav a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
 
+    nav a:hover {
+        color: #1b1b17;
+    }
 
+    /* Anuncios */
+    .anuncios-container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        place-content: center;
+    }
 
+    .anuncio {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: #ffffff;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 2px;
+        padding: 15px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
 
+    nav ul {
+        flex-direction: column;
+        /* Cambia a una disposición de columna para pantallas más pequeñas */
+        text-align: center;
+        /* Centra los elementos en pantallas más pequeñas */
+    }
 
-
-
-
+    nav li {
+        margin: 10px 0;
+    }
+}

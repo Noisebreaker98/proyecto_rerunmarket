@@ -1,5 +1,5 @@
 //EDITOR JQTE PARA CAMPO DESCRIPCION
-$(document).ready(function() {
+$(document).ready(function () {
     // Inicializa el editor jqte en el campo de descripción
     $('#descripcion-anuncio').jqte({
         fsize: true,
@@ -27,3 +27,10 @@ $(document).ready(function() {
         maxlength: 200
     });
 });
+
+/**
+ * Redirige al usuario a la sección de Mis anuncios
+ */
+function volverAtras() {
+    window.location.href = 'index.php?mis_anuncios=true';
+}

@@ -155,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <section id="editar-anuncio">
+    <span class="cerrar" onclick="volverAtras()">×</span>
         <h2>Editar Anuncio</h2>
 
         <!-- Mostrar mensajes de error -->

@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo oscuro semi-transparente */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,6 +48,14 @@ body {
     margin-bottom: 10px;
 }
 
-.error-container ul{
+.error-container ul {
     list-style-type: none;
+}
+
+.cerrar {
+    position: relative;
+    top: 10px;
+    right: -337px;
+    font-size: 20px;
+    cursor: pointer;
 }

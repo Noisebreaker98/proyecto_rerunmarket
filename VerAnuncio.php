@@ -47,6 +47,7 @@ $propietario = $usuariosDAO->getById($anuncio->getIdUsuario());
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./styles/showProduct.css">
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 </head>
 
 <body>
@@ -72,7 +73,9 @@ $propietario = $usuariosDAO->getById($anuncio->getIdUsuario());
                     </div>
                 </div>
                 <p>Publicado hace <?= time_elapsed_string($anuncio->getFechaCreacion()) ?> por <strong> <?= $propietario->getNombre(); ?></strong></p>
-
+                <?php if($propietario->getPoblacion()) : ?>
+                <p>Ubicación: <strong><?= $propietario->getPoblacion() ?></strong></p>
+                <?php endif; ?>
                 <!-- Mostrar acciones solo si el usuario está autenticado y es el propietario del anuncio -->
                 <?php
                 if ($propietario && $propietario instanceof Usuario && $anuncio && $anuncio instanceof Anuncio && Sesion::getUsuario() && $propietario->getId() === Sesion::getUsuario()->getId()) :
@@ -85,16 +88,7 @@ $propietario = $usuariosDAO->getById($anuncio->getIdUsuario());
             </div>
         </div>
     </div>
-
-    <!-- Scripts para Glide.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-    <script>
-        new Glide('.glide').mount();
-
-        function cerrarAnuncio() {
-            window.location.href = 'index.php';
-        }
-    </script>
+    <script src="./scripts/carrouselVerAnuncio.js"></script>
 </body>
 
 </html>

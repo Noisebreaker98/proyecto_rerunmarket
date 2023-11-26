@@ -270,22 +270,22 @@ if (isset($_SESSION['registro_mensaje'])) {
 
             <form id="formulario-registro" method="post" action="Registro.php">
                 <label for="email-registro">Email:</label>
-                <input type="email" id="email-registro" name="email-registro" value="<?php echo $registro_values['email-registro']; ?>" required>
+                <input type="email" id="email-registro" name="email-registro" value="<?php echo $registro_values['email-registro']; ?>" required placeholder="example@gmail.com">
 
                 <label for="password-registro">Contraseña:</label>
-                <input type="password" id="password-registro" name="password-registro" value="<?php echo $registro_values['password-registro']; ?>" required>
+                <input type="password" id="password-registro" name="password-registro" value="<?php echo $registro_values['password-registro']; ?>" required placeholder="*********">
 
                 <label for="repeat-password-registro">Repetir Contraseña:</label>
-                <input type="password" id="repeat-password-registro" name="repeat-password-registro" value="<?php echo $registro_values['repeat-password-registro']; ?>" required>
+                <input type="password" id="repeat-password-registro" name="repeat-password-registro" value="<?php echo $registro_values['repeat-password-registro']; ?>" required placeholder="*********">
 
                 <label for="nombre-registro">Nombre:</label>
-                <input type="text" id="nombre-registro" name="nombre-registro" value="<?php echo $registro_values['nombre-registro']; ?>" required>
+                <input type="text" id="nombre-registro" name="nombre-registro" value="<?php echo $registro_values['nombre-registro']; ?>" required placeholder="Example">
 
                 <label for="telefono-registro">Teléfono:</label>
-                <input type="tel" id="telefono-registro" name="telefono-registro" value="<?php echo $registro_values['telefono-registro']; ?>" required>
+                <input type="tel" id="telefono-registro" name="telefono-registro" value="<?php echo $registro_values['telefono-registro']; ?>" required placeholder="635555942">
 
                 <label for="poblacion-registro">Población:</label>
-                <input type="text" id="poblacion-registro" name="poblacion-registro" value="<?php echo $registro_values['poblacion-registro']; ?>">
+                <input type="text" id="poblacion-registro" name="poblacion-registro" value="<?php echo $registro_values['poblacion-registro']; ?>" placeholder="Tomelloso">
 
                 <div class="btn-login">
                     <button type="submit">Registrarme</button>
@@ -300,13 +300,13 @@ if (isset($_SESSION['registro_mensaje'])) {
             <!-- Formulario de creación de anuncios -->
             <form id="formulario-publicar-anuncio" method="post" action="CreateAnuncio.php" enctype="multipart/form-data">
                 <label for="titulo-anuncio">Título:</label>
-                <input type="text" id="titulo-anuncio" name="titulo-anuncio" required>
+                <input type="text" id="titulo-anuncio" name="titulo-anuncio" required placeholder="Ej: Moto de agua">
 
                 <label for="descripcion-anuncio">Descripción:</label>
                 <textarea id="descripcion-anuncio" name="descripcion-anuncio" required></textarea>
 
                 <label for="precio-anuncio">Precio:</label>
-                <input type="text" id="precio-anuncio" pattern="\d+(\.\d{1,2})?" name="precio-anuncio" placeholder="Ejemplo: 15.99" required>
+                <input type="text" id="precio-anuncio" pattern="\d+(\.\d{1,2})?" name="precio-anuncio" placeholder="Ej: 15.99" required>
 
                 <label for="foto-anuncio">Foto principal:</label>
                 <input type="file" id="foto-anuncio" name="foto-anuncio" accept="image/*">
